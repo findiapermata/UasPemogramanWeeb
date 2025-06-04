@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berqurban Bersama UNP Peduli</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2E7D32;
+      --secondary: #66BB6A;
+      --accent: #FFB74D;
+      --gold: #FFD700;
+      --dark: #1B5E20;
+      --light: #E8F5E8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--light) 0%, #F1F8E9 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      color: #333;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="mosque" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="2" fill="%23E8F5E8" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23mosque)"/></svg>');
+      z-index: -1;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(2deg); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+    }
+
+    .main-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-top: 2rem;
+    }
+
+    .main-title h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .main-title .subtitle {
+      font-size: 1.1rem;
+      color: var(--dark);
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    .main-title::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+      margin: 1rem auto;
+      border-radius: 2px;
+    }
+
+    .enhanced-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .enhanced-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    }
+
+    .enhanced-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header-custom {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1.5rem;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header-custom::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+      100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    }
+
+    .card-header-custom h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header-warning {
+      background: linear-gradient(135deg, var(--accent), #FFA726);
+    }
+
+    .card-header-success {
+      background: linear-gradient(135deg, var(--secondary), #4CAF50);
+    }
+
+    .card-body-custom {
+      padding: 2rem;
+    }
+
+    .form-floating-custom {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border: 2px solid #E0E0E0;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .form-control-custom:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.25);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      z-index: 2;
+    }
+
+    .form-label-custom {
+      color: var(--dark);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .btn-custom {
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-success-custom {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .btn-primary-custom {
+      background: linear-gradient(135deg, #1976D2, #42A5F5);
+      color: white;
+    }
+
+    .btn-outline-custom {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-custom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-custom:hover::before {
+      left: 100%;
+    }
+
+    .report-section {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .report-icon {
+      font-size: 3rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .islamic-pattern {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      opacity: 0.1;
+      color: var(--primary);
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .number-format {
+      position: relative;
+    }
+
+    .number-format::before {
+      content: 'Rp';
+      position: absolute;
+      left: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .number-format input {
+      padding-left: 5rem !important;
+    }
+
+    /* Success Modal */
+    .modal-success .modal-header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+    }
+
+    .modal-success .modal-body {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .modal-success-icon {
+      font-size: 4rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      animation: bounce 0.5s;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+      40% {transform: translateY(-30px);} 
+      60% {transform: translateY(-15px);} 
+    }
+
+    /* Error Message */
+    .error-message {
+      color: #dc3545;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main-title h1 {
+        font-size: 2rem;
+      }
+      
+      .card-body-custom {
+        padding: 1.5rem;
+      }
+      
+      .container {
+        padding: 1rem;
+      }
+    }
+
+    .success-animation {
+      animation: successPulse 0.6s ease-out;
+    }
+
+    @keyframes successPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Floating particles */
+    .particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.6;
+      animation: float-up 8s linear infinite;
+    }
+
+    @keyframes float-up {
+      to {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <!-- Header Section -->
+    <div class="main-title fade-in">
+      <h1><i class="fas fa-mosque"></i> Berqurban Bersama UNP Peduli</h1>
+      <p class="subtitle">Program Qurban Universitas Negeri Padang 1447 H</p>
+    </div>
+
+    <!-- Form Pendaftaran Peserta Qurban -->
+    <div class="enhanced-card fade-in">
+      <div class="card-header-custom">
+        <h3><i class="fas fa-user-plus"></i> Form Pendaftaran Peserta Qurban</h3>
+        <i class="fas fa-star islamic-pattern"></i>
+      </div>
+      <div class="card-body-custom">
+        <form id="registrationForm" method="POST">
+          <div class="form-floating-custom">
+            <label for="nama" class="form-label-custom">Nama Lengkap</label>
+            <div style="position: relative;">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" name="nama" id="nama" class="form-control-custom" required 
+                     placeholder="Masukkan nama lengkap Anda">
+              <div class="error-message" id="nama-error">Nama harus diisi</div>
+            </div>
+          </div>
+          
+          <div class="form-floating-custom">
+            <label for="nip" class="form-label-custom">NIP (Nomor Induk Pegawai)</label>
+            <div style="position: relative;">
+              <i class="fas fa-id-card input-icon"></i>
+              <input type="text" name="nip" id="nip" class="form-control-custom" required 
+                     placeholder="Masukkan NIP Anda" pattern="\d+" minlength="8" maxlength="18">
+              <div class="error-message" id="nip-error">NIP harus berupa angka (8-18 digit)</div>
+            </div>
+          </div>
+          
+          <div class="form-floating-custom">
+            <label for="jabatan" class="form-label-custom">Jabatan</label>
+            <div style="position: relative;">
+              <i class="fas fa-briefcase input-icon"></i>
+              <select name="jabatan" id="jabatan" class="form-control-custom" required style="padding-left: 3rem;">
+                <option value="">Pilih Jabatan</option>
+                <option value="Dosen">Dosen</option>
+                <option value="Karyawan">Karyawan</option>
+              </select>
+              <div class="error-message" id="jabatan-error">Silakan pilih jabatan</div>
+            </div>
+          </div>
+          
+          <div class="form-floating-custom number-format">
+            <label for="nilai_qurban" class="form-label-custom">Perkiraan Nilai Qurban Tahun Depan</label>
+            <div style="position: relative;">
+              <i class="fas fa-money-bill-wave input-icon"></i>
+              <input type="number" name="nilai_qurban" id="nilai_qurban" class="form-control-custom" required 
+                     placeholder="0" min="100000" step="1000">
+              <div class="error-message" id="nilai-error">Minimal Rp 100.000</div>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-custom btn-success-custom">
+            <i class="fas fa-paper-plane"></i> Daftar Sekarang
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Form Input Potongan Gaji -->
+    <div class="enhanced-card fade-in">
+      <div class="card-header-custom card-header-warning">
+        <h3><i class="fas fa-calculator"></i> Input Potongan Gaji Bulanan</h3>
+        <i class="fas fa-coins islamic-pattern"></i>
+      </div>
+      <div class="card-body-custom">
+        <p class="text-muted mb-4">
+          <i class="fas fa-info-circle"></i> 
+          Bagian ini khusus untuk Bagian Penggajian dalam mencatat potongan gaji bulanan peserta qurban.
+        </p>
+        <form id="potonganForm" method="POST">
+          <div class="form-floating-custom">
+            <label for="nip_potong" class="form-label-custom">NIP Peserta</label>
+            <div style="position: relative;">
+              <i class="fas fa-search input-icon"></i>
+              <input type="text" name="nip_potong" id="nip_potong" class="form-control-custom" required 
+                     placeholder="Masukkan NIP peserta yang akan dipotong gajinya" pattern="\d+" minlength="8" maxlength="18">
+              <div class="error-message" id="nip_potong-error">NIP harus berupa angka (8-18 digit)</div>
+            </div>
+          </div>
+          
+          <div class="form-floating-custom number-format">
+            <label for="potongan_bulan" class="form-label-custom">Jumlah Potongan Bulan Ini</label>
+            <div style="position: relative;">
+              <i class="fas fa-minus-circle input-icon"></i>
+              <input type="number" name="potongan_bulan" id="potongan_bulan" class="form-control-custom" required 
+                     placeholder="0" min="10000" step="1000">
+              <div class="error-message" id="potongan-error">Minimal Rp 10.000</div>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-custom btn-primary-custom">
+            <i class="fas fa-save"></i> Simpan Potongan
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Laporan Section -->
+    <div class="enhanced-card fade-in">
+      <div class="card-header-custom card-header-success">
+        <h3><i class="fas fa-chart-bar"></i> Laporan Peserta Qurban 1447 H</h3>
+        <i class="fas fa-file-alt islamic-pattern"></i>
+      </div>
+      <div class="card-body-custom report-section">
+        <div class="report-icon">
+          <i class="fas fa-file-download"></i>
+        </div>
+        <h4 style="color: var(--dark); margin-bottom: 1rem;">Laporan Lengkap Peserta Qurban</h4>
+        <p class="text-muted mb-3">
+          Lihat detail peserta, total potongan gaji, dan progress pembayaran qurban untuk tahun 1447 H
+        </p>
+        <button id="viewReportBtn" class="btn-custom btn-outline-custom">
+          <i class="fas fa-eye"></i> Lihat Laporan Lengkap
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-success">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-check-circle"></i> Sukses!</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h4 id="successMessage">Data berhasil disimpan!</h4>
+          <p class="text-muted">Data telah tersimpan dalam sistem kami.</p>
+          <button type="button" class="btn-custom btn-success-custom mt-3" data-bs-dismiss="modal">
+            <i class="fas fa-thumbs-up"></i> Mengerti
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Modal -->
+  <div class="modal fade" id="reportModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header card-header-custom">
+          <h5 class="modal-title"><i class="fas fa-file-alt"></i> Laporan Peserta Qurban</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-success">
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>NIP</th>
+                  <th>Jabatan</th>
+                  <th>Target</th>
+                  <th>Terbayar</th>
+                  <th>Progress</th>
+                </tr>
+              </thead>
+              <tbody id="reportTableBody">
+                <!-- Data will be inserted here by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-custom btn-outline-custom" data-bs-dismiss="modal">
+            <i class="fas fa-times"></i> Tutup
+          </button>
+          <button type="button" class="btn-custom btn-success-custom" id="exportPdfBtn">
+            <i class="fas fa-file-pdf"></i> Export PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    // Initialize the jsPDF library
+    const { jsPDF } = window.jspdf;
+    
+    // Sample data storage (in a real app, this would be server-side)
+    let participants = JSON.parse(localStorage.getItem('qurbanParticipants')) || [];
+    let deductions = JSON.parse(localStorage.getItem('qurbanDeductions')) || [];
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize modals
+      const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+      const reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
+
+      // Form validation for registration form
+      const registrationForm = document.getElementById('registrationForm');
+      registrationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateRegistrationForm()) {
+          const formData = {
+            nama: document.getElementById('nama').value.trim(),
+            nip: document.getElementById('nip').value.trim(),
+            jabatan: document.getElementById('jabatan').value,
+            nilai_qurban: parseInt(document.getElementById('nilai_qurban').value),
+            terbayar: 0,
+            tanggal_daftar: new Date().toISOString().split('T')[0]
+          };
+          
+          // Check if NIP already exists
+          const existingParticipant = participants.find(p => p.nip === formData.nip);
+          if (existingParticipant) {
+            showError('nip-error', 'NIP ini sudah terdaftar');
+            return;
+          }
+          
+          // Save to "database"
+          participants.push(formData);
+          localStorage.setItem('qurbanParticipants', JSON.stringify(participants));
+          
+          // Show success message
+          document.getElementById('successMessage').textContent = 'Pendaftaran berhasil!';
+          successModal.show();
+          
+          // Reset form
+          registrationForm.reset();
+        }
+      });
+
+      // Form validation for deduction form
+      const potonganForm = document.getElementById('potonganForm');
+      potonganForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateDeductionForm()) {
+          const formData = {
+            nip: document.getElementById('nip_potong').value.trim(),
+            jumlah: parseInt(document.getElementById('potongan_bulan').value),
+            tanggal: new Date().toISOString().split('T')[0]
+          };
+          
+          // Check if participant exists
+          const participant = participants.find(p => p.nip === formData.nip);
+          if (!participant) {
+            showError('nip_potong-error', 'NIP tidak ditemukan');
+            return;
+          }
+          
+          // Update participant's paid amount
+          participant.terbayar = (participant.terbayar || 0) + formData.jumlah;
+          localStorage.setItem('qurbanParticipants', JSON.stringify(participants));
+          
+          // Save deduction record
+          deductions.push(formData);
+          localStorage.setItem('qurbanDeductions', JSON.stringify(deductions));
+          
+          // Show success message
+          document.getElementById('successMessage').textContent = 'Potongan berhasil dicatat!';
+          successModal.show();
+          
+          // Reset form
+          potonganForm.reset();
+        }
+      });
+
+      // View report button
+      document.getElementById('viewReportBtn').addEventListener('click', function() {
+        generateReportTable();
+        reportModal.show();
+      });
+
+      // Export PDF button
+      document.getElementById('exportPdfBtn').addEventListener('click', function() {
+        exportToPDF();
+      });
+
+      // Input validation functions
+      function validateRegistrationForm() {
+        let isValid = true;
+        
+        // Validate name
+        const nama = document.getElementById('nama').value.trim();
+        if (nama === '') {
+          showError('nama-error', 'Nama harus diisi');
+          isValid = false;
+        } else {
+          hideError('nama-error');
+        }
+        
+        // Validate NIP
+        const nip = document.getElementById('nip').value.trim();
+        if (nip === '' || !/^\d+$/.test(nip) || nip.length < 8 || nip.length > 18) {
+          showError('nip-error', 'NIP harus berupa angka (8-18 digit)');
+          isValid = false;
+        } else {
+          hideError('nip-error');
+        }
+        
+        // Validate position
+        const jabatan = document.getElementById('jabatan').value;
+        if (jabatan === '') {
+          showError('jabatan-error', 'Silakan pilih jabatan');
+          isValid = false;
+        } else {
+          hideError('jabatan-error');
+        }
+        
+        // Validate amount
+        const nilai = parseInt(document.getElementById('nilai_qurban').value);
+        if (isNaN(nilai) || nilai < 100000) {
+          showError('nilai-error', 'Minimal Rp 100.000');
+          isValid = false;
+        } else {
+          hideError('nilai-error');
+        }
+        
+        return isValid;
+      }
+
+      function validateDeductionForm() {
+        let isValid = true;
+        
+        // Validate NIP
+        const nip = document.getElementById('nip_potong').value.trim();
+        if (nip === '' || !/^\d+$/.test(nip) || nip.length < 8 || nip.length > 18) {
+          showError('nip_potong-error', 'NIP harus berupa angka (8-18 digit)');
+          isValid = false;
+        } else {
+          hideError('nip_potong-error');
+        }
+        
+        // Validate amount
+        const jumlah = parseInt(document.getElementById('potongan_bulan').value);
+        if (isNaN(jumlah) || jumlah < 10000) {
+          showError('potongan-error', 'Minimal Rp 10.000');
+          isValid = false;
+        } else {
+          hideError('potongan-error');
+        }
+        
+        return isValid;
+      }
+
+      function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+      }
+
+      function hideError(elementId) {
+        document.getElementById(elementId).style.display = 'none';
+      }
+
+      // Generate report table
+      function generateReportTable() {
+        const tableBody = document.getElementById('reportTableBody');
+        tableBody.innerHTML = '';
+        
+        if (participants.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Belum ada data peserta</td></tr>';
+          return;
+        }
+        
+        participants.forEach((participant, index) => {
+          const progress = Math.min(Math.round((participant.terbayar || 0) / participant.nilai_qurban * 100), 100);
+          const progressColor = progress < 30 ? 'danger' : progress < 70 ? 'warning' : 'success';
+          
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${participant.nama}</td>
+            <td>${participant.nip}</td>
+            <td>${participant.jabatan}</td>
+            <td>${formatCurrency(participant.nilai_qurban)}</td>
+            <td>${formatCurrency(participant.terbayar || 0)}</td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-${progressColor}" role="progressbar" 
+                     style="width: ${progress}%" aria-valuenow="${progress}" 
+                     aria-valuemin="0" aria-valuemax="100">
+                  ${progress}%
+                </div>
+              </div>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      // Export to PDF function
+      function exportToPDF() {
+        const doc = new jsPDF();
+        
+        // Title
+        doc.setFontSize(18);
+        doc.setTextColor(46, 125, 50);
+        doc.text('Laporan Peserta Qurban UNP Peduli', 105, 20, { align: 'center' });
+        
+        // Subtitle
+        doc.setFontSize(12);
+        doc.setTextColor(128, 128, 128);
+        doc.text('Program Qurban Universitas Negeri Padang 1447 H', 105, 28, { align: 'center' });
+        
+        // Date
+        doc.setFontSize(10);
+        doc.text(`Dicetak pada: ${new Date().toLocaleDateString('id-ID')}`, 105, 35, { align: 'center' });
+        
+        // Table data
+        const headers = [['No', 'Nama', 'NIP', 'Jabatan', 'Target', 'Terbayar', 'Progress (%)']];
+        const data = participants.map((p, i) => [
+          i + 1,
+          p.nama,
+          p.nip,
+          p.jabatan,
+          formatCurrency(p.nilai_qurban),
+          formatCurrency(p.terbayar || 0),
+          Math.min(Math.round((p.terbayar || 0) / p.nilai_qurban * 100), 100)
+        ]);
+        
+        // Add table
+        doc.autoTable({
+          head: headers,
+          body: data,
+          startY: 40,
+          theme: 'grid',
+          headStyles: {
+            fillColor: [46, 125, 50],
+            textColor: 255,
+            fontStyle: 'bold'
+          },
+          alternateRowStyles: {
+            fillColor: [232, 245, 233]
+          },
+          margin: { top: 40 }
+        });
+        
+        // Footer
+        doc.setFontSize(10);
+        doc.setTextColor(128, 128, 128);
+        doc.text('© UNP Peduli - Sistem Qurban Digital', 105, doc.internal.pageSize.height - 10, { align: 'center' });
+        
+        // Save the PDF
+        doc.save('Laporan_Qurban_UNP_' + new Date().toISOString().split('T')[0] + '.pdf');
+      }
+
+      // Format currency helper
+      function formatCurrency(amount) {
+        return 'Rp ' + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      }
+
+      // Create floating particles
+      function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        document.body.appendChild(particle);
+        
+        // Remove particle after animation completes
+        setTimeout(() => {
+          particle.remove();
+        }, 8000);
+      }
+      
+      // Create particles periodically
+      setInterval(createParticle, 500);
+      
+      // Add fade-in animation to cards with delay
+      const cards = document.querySelectorAll('.enhanced-card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.2}s`;
+      });
+    });
+  </script>
+</body>
+</html>
